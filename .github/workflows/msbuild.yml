@@ -11,10 +11,6 @@ on:
   pull_request:
     branches: [ "main" ]
 
-env:
-  # Path to the solution file relative to the root of the project.
-  SOLUTION_FILE_PATH: ${{env.GITHUB_WORKSPACE}}
-
 permissions:
   contents: read
 
@@ -29,8 +25,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-
-
 
     - name: Add MSBuild to PATH
       uses: microsoft/setup-msbuild@v1.0.2
@@ -48,4 +42,7 @@ jobs:
       working-directory: ${{env.GITHUB_WORKSPACE}}
       # Add additional options to the MSBuild command line here (like platform or verbosity level).
       # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
-      run: msbuild /t:"Runtime" /p:Configuration=${{matrix.BUILD_CONFIGURATION}} /p:Platform="Win64" /m ${{env.SOLUTION_FILE_PATH}}Project.sln
+      run: msbuild /t:"Runtime" /p:Configuration=${{matrix.BUILD_CONFIGURATION}} /p:Platform="Win64" /m Project.sln.sln
+
+
+      
