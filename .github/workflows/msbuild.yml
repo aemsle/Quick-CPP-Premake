@@ -13,7 +13,7 @@ on:
 
 env:
   # Path to the solution file relative to the root of the project.
-  SOLUTION_FILE_PATH: ${{GITHUB_WORKSPACE}}
+  SOLUTION_FILE_PATH: ${{env.GITHUB_WORKSPACE}}
 
 permissions:
   contents: read
