@@ -33,15 +33,15 @@ newaction
     execute     = function ()
         print("setting up project directories...")
 
-        if not os.isdir("./res")
+        if not os.isdir("./res") then
             os.mkdir("./bin")
         end
 
-        if not os.isdir("./res")
+        if not os.isdir("./res") then
             os.mkdir("./bin-int")
         end
 
-        if not os.isdir("./res")
+        if not os.isdir("./res") then
             os.mkdir("./res")
         end
         
