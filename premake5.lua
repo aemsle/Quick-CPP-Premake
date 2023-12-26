@@ -1,8 +1,5 @@
 -- premake5.lua
 
--- add define for c++20 to work with 10x
-defines{"_MSVC_LANG=202002L"}
-
 -- Clean Function --
 newaction {
     trigger     = "clean",
@@ -33,18 +30,18 @@ newaction
     execute     = function ()
         print("setting up project directories...")
 
-        if not os.isdir("./res") then
+        if not os.isdir("./bin") then
             os.mkdir("./bin")
         end
 
-        if not os.isdir("./res") then
+        if not os.isdir("./bin-int") then
             os.mkdir("./bin-int")
         end
 
         if not os.isdir("./res") then
             os.mkdir("./res")
         end
-        
+
         os.execute("premake5 vs2022")
         print("done.")
     end
@@ -104,4 +101,8 @@ project "Runtime"
         "inc"
     }
 
-    prebuildcommands { "{COPYDIR} \"%{wks.location}res\" \"%{cfg.buildtarget.directory}res\"" }
+    prebuildcommands { 
+            "{MKDIR} \"%{cfg.buildtarget.directory}res\"",
+            "{COPYDIR} \"%{wks.location}res\" \"%{cfg.buildtarget.directory}res\"" 
+    }
+    
