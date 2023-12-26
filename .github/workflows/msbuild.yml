@@ -42,7 +42,7 @@ jobs:
       working-directory: ${{env.GITHUB_WORKSPACE}}
       # Add additional options to the MSBuild command line here (like platform or verbosity level).
       # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
-      run: msbuild /t:"Runtime" /p:Configuration=${{matrix.BUILD_CONFIGURATION}} /p:Platform="Win64" /m Project.sln.sln
+      run: msbuild /t:"Runtime" /p:Configuration=${{matrix.BUILD_CONFIGURATION}} /p:Platform="Win64" /m Project.sln
 
 
       
