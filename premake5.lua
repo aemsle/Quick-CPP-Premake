@@ -103,6 +103,6 @@ project "Runtime"
 
     prebuildcommands { 
             "{MKDIR} \"%{cfg.buildtarget.directory}res\"",
-            "{COPYDIR} \"%{wks.location}res\" \"%{cfg.buildtarget.directory}res\"" 
+            "{COPYDIR} \"%{wks.location}res/\" \"%{cfg.buildtarget.directory}res/\"" 
     }
     
