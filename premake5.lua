@@ -1,5 +1,8 @@
 -- premake5.lua
 
+-- add define for c++20 to work with 10x
+defines{"_MSVC_LANG=202002L"}
+
 -- Clean Function --
 newaction {
     trigger     = "clean",
@@ -8,7 +11,13 @@ newaction {
         print("cleaning project directory...")
         os.rmdir("./bin")
         os.rmdir("./bin-int")
-        local ok, err = os.remove{"**.sln", "**.vcxproj"}
+        local ok, err = os.remove{
+            "**.sln"
+            , "**.vcxproj"
+            , "**.vcxproj.user"
+            , "**.vcxproj.filters"
+        }
+
         if not ok then
             error(err)
         end
@@ -17,15 +26,27 @@ newaction {
 }
 
 -- Clean Function --
-newaction {
+newaction
+{
     trigger     = "generate",
     description = "generate project directories",
     execute     = function ()
-       print("setting up project directories...")
-       os.mkdir("./bin")
-       os.mkdir("./bin-int")
-       os.execute("premake5 vs2022")
-       print("done.")
+        print("setting up project directories...")
+
+        if not os.isdir("./res")
+            os.mkdir("./bin")
+        end
+
+        if not os.isdir("./res")
+            os.mkdir("./bin-int")
+        end
+
+        if not os.isdir("./res")
+            os.mkdir("./res")
+        end
+        
+        os.execute("premake5 vs2022")
+        print("done.")
     end
 }
 
@@ -35,6 +56,7 @@ workspace "Project"
     configurations { "debug", "profile", "release", "release_final" }
     platforms { "Win64" }
     cppdialect "C++20"
+
 
     filter { "platforms:Win64" }
         system "Windows"
